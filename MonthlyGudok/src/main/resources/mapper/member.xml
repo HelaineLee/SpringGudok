@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.model.MemberDAO">
+	<select id="memList" resultType="com.spring.model.MemberDTO">
+		select * from member order by
+		num desc
+	</select>
+	<select id="memCont" resultType="com.spring.model.MemberDTO"
+		parameterType="int">
+		select * from member where num=#{num}
+	</select>
+	<select id="memNum" resultType="int">
+		select max(num) from member
+	</select>
+	<insert id="memInsert"
+		parameterType="com.spring.model.MemberDTO">
+		insert into member values
+		(#{num},#{memid},#{memname},#{pwd},#{age},#{mileage},#{job},#{addr},sysdate)
+	</insert>
+	<delete id="memDelete" parameterType="int">
+		delete from member where
+		num=#{num}
+	</delete>
+	<update id="memUpdate"
+		parameterType="com.spring.model.MemberDTO">
+		update member set memname=#{memname}, pwd=#{pwd}, mileage=#{mileage},
+		job=#{job}, addr=#{addr}, age=#{age} where num=#{num}
+	</update>
+</mapper>

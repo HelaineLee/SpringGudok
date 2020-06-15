@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.model.EmpDAO">
+<!-- ![CDATA[]] : 쿼리문을 작성할 때 조건식 기호(<,>,&)를 사용해야 하는데
+xml에서 그냥 CDATA를 사용하지 않을 경우 태그로 인식하는 경우가 종종 존재하게 됨.
+이럴 경우 에러로 나타나기 때문에 태그가 아니라 실제 쿼리에 필요한 코드라고 알려주는 방법
+-->
+	<select id="allList" resultType="com.spring.model.EmpDTO">
+	<![CDATA[
+	select * from emp order by empno
+	]]>
+	</select>
+	<insert id="add" parameterType="com.spring.model.EmpDTO">
+		insert into emp values
+		(#{empno},#{ename},#{job},#{mgr},sysdate,#{sal},#{comm},#{deptno})
+	</insert>
+	<select id="cont" parameterType="int"
+		resultType="com.spring.model.EmpDTO">
+		select * from emp where empno = #{empno}
+	</select>
+	<update id="update" parameterType="com.spring.model.EmpDTO">
+		update emp set ename=#{ename},
+		job=#{job}, sal=#{sal}, comm=#{comm}, deptno=#{deptno} where
+		empno=#{empno}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from emp where
+		empno=#{empno}
+	</delete>
+</mapper>
